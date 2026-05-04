@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+
+    <div style="background: #fff; border: 0.5px solid #F09595; border-radius: 12px; padding: 2.5rem 2rem; max-width: 480px; margin: 0 auto; text-align: center;">
+
+        <!-- Ícone -->
+        <div style="font-size: 48px; margin-bottom: 1rem;">&#128679;</div>
+
+        <!-- Título -->
+        <h1 style="font-size: 18px; font-weight: 500; color: #A32D2D; margin-bottom: 0.5rem;">
+            {{ top }}
+        </h1>
+
+        <!-- Mensagem -->
+        <p style="font-size: 15px; color: #5F5E5A; margin-bottom: 1.5rem;">
+            {{ bottom }}
+        </p>
+
+        <!-- Botão voltar -->
+        <a href="javascript:history.back()"
+           style="display: inline-block; padding: 8px 20px; background: #3B6D11; color: #EAF3DE; border-radius: 6px; font-size: 14px; text-decoration: none;">
+            &#8592; Go back
+        </a>
+    </div>
+
+{% endblock %}

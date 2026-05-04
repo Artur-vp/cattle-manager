@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Manager
+{% endblock %}
+
+{% block main %}
+<div style="padding: 2rem 0;">
+    <div style="text-align: center; margin-bottom: 2.5rem;">
+        <div style="font-size: 40px; margin-bottom: 0.5rem;">🐄</div>
+        <h1 style="font-size: 28px; font-weight: 500; margin: 0 0 0.5rem;">Cattle Manager</h1>
+        <p style="font-size: 15px; color: var(--color-text-secondary); margin: 0;">A simple and organized way to manage
+            your herd</p>
+    </div>
+
+    <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 2.5rem;">
+        <div
+            style="background: var(--color-background-secondary); border-radius: 8px; padding: 1rem; text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 6px;">📋</div>
+            <p style="font-size: 13px; font-weight: 500; margin: 0 0 4px;">New animal</p>
+            <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">Add animals with ID, birth date
+                and value</p>
+        </div>
+        <div
+            style="background: var(--color-background-secondary); border-radius: 8px; padding: 1rem; text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 6px;">📊</div>
+            <p style="font-size: 13px; font-weight: 500; margin: 0 0 4px;">Catalog</p>
+            <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">View age, value, sex and herd
+                charts</p>
+        </div>
+        <div
+            style="background: var(--color-background-secondary); border-radius: 8px; padding: 1rem; text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 6px;">🗂️</div>
+            <p style="font-size: 13px; font-weight: 500; margin: 0 0 4px;">History</p>
+            <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">Track every removal with reason
+                and date</p>
+        </div>
+    </div>
+
+    <div style="border-left: 3px solid #ccc; padding-left: 1.25rem; margin-bottom: 1.5rem;">
+        <p>After creating an account and logging in, you can register each animal with its identification, date of
+            birth, and value. The system automatically calculates the age in years and months, keeping information
+            always up to date.</p>
+        <p>The catalog page displays your complete herd list alongside a chart showing the distribution between males
+            and females, giving you a quick overview of your herd composition.</p>
+        <p style="margin: 0;">When an animal leaves the herd, register the reason — sale, death, or transfer — and keep
+            a permanent removal log of every animal that has passed through your farm.</p>
+    </div>
+
+    <div
+        style="background: var(--color-background-secondary); border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 12px;">
+        <div style="font-size: 20px;">🌱</div>
+        <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0;">Replace paper records and
+            spreadsheets with a fast, accessible, and secure digital tool — available from any device with a browser.
+        </p>
+    </div>
+</div>
+{% endblock %}

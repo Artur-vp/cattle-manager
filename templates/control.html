@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Control
+{% endblock %}
+
+{% block main %}
+    <h2 style="color: #27500A; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 1.5rem;">
+        &#128202; Control
+    </h2>
+
+    <!-- Cards de totais -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem;">
+        <div style="background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; padding: 1rem 1.25rem; text-align: center;">
+            <div style="font-size: 12px; color: #3B6D11; margin-bottom: 6px;">Total animals</div>
+            <div style="font-size: 28px; font-weight: 500; color: #27500A;">{{ total }}</div>
+        </div>
+        <div style="background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; padding: 1rem 1.25rem; text-align: center;">
+            <div style="font-size: 12px; color: #3B6D11; margin-bottom: 6px;">Females</div>
+            <div style="font-size: 28px; font-weight: 500; color: #72243E;">{{ total_females }}</div>
+        </div>
+        <div style="background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; padding: 1rem 1.25rem; text-align: center;">
+            <div style="font-size: 12px; color: #3B6D11; margin-bottom: 6px;">Males</div>
+            <div style="font-size: 28px; font-weight: 500; color: #0C447C;">{{ total_males }}</div>
+        </div>
+    </div>
+
+    <!-- Gráfico -->
+    <div style="background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; padding: 1.5rem;">
+        <canvas id="grafico" style="max-width: 320px; width: 100%; display: block; margin: 0 auto;"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script>
+        const ctx = document.getElementById("grafico").getContext("2d");
+
+        new Chart(ctx, {
+            type: "pie",
+            data: {
+                labels: ["Female", "Male"],
+                datasets: [{
+                    data: [{{ total_females }}, {{ total_males }}],
+                    backgroundColor: ["#ED93B1", "#85B7EB"],
+                    borderColor: ["#D4537E", "#378ADD"],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,        // ✅ adapta ao tamanho do container
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { position: "bottom" },
+                    title: {
+                        display: true,
+                        text: "Herd distribution",
+                        color: "#27500A",
+                        font: { size: 14, weight: "500" }
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}

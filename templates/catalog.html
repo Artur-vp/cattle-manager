@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Catalog
+{% endblock %}
+
+{% block main %}
+    <h2 style="color: #27500A; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 1.5rem;">
+        &#128004; Catalog
+    </h2>
+
+    <!-- Barra de pesquisa -->
+    <div style="margin-bottom: 12px;">
+        <input type="text" id="search" placeholder="&#128269; Search animal..."
+            style="width: 100%; height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px; outline: none;">
+    </div>
+
+    <!-- Tabela -->
+    <div style="background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; overflow: hidden; margin-bottom: 1rem;">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Animal</th>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Sex</th>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Birthday</th>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Age</th>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Price</th>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                {% for catalog in catalogs %}
+                <tr>
+                    <td style="border-color: #f0ebe0;">{{ catalog.identificacao }}</td>
+                    <td style="border-color: #f0ebe0;">
+                        {% if catalog.sexo == "Female" %}
+                            <span style="background: #FBEAF0; color: #72243E; font-size: 11px; padding: 2px 10px; border-radius: 20px; display: inline-block;">
+                                Female
+                            </span>
+                        {% else %}
+                            <span style="background: #E6F1FB; color: #0C447C; font-size: 11px; padding: 2px 10px; border-radius: 20px; display: inline-block;">
+                                Male
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td style="border-color: #f0ebe0;">{{ catalog.data_nascimento }}</td>
+                    <td style="border-color: #f0ebe0;">{{ catalog.idade }}</td>
+                    <td style="border-color: #f0ebe0;">R$ {{ "%.2f"|format(catalog.valor) }}</td>
+                    <td style="border-color: #f0ebe0;">
+                        <a href="{{ url_for('history') }}"
+                           style="background: #FCEBEB; color: #A32D2D; border: 0.5px solid #F09595; border-radius: 6px; padding: 4px 12px; font-size: 12px; text-decoration: none; display: inline-block;">
+                            Remove
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" style="text-align: center; color: #888780; padding: 1.5rem;">
+                        No animals in the catalog yet.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div id="noResults" style="display: none; text-align: center; color: #888780; padding: 1.5rem; background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; margin-top: 8px;">
+        No animals found.
+    </div>
+
+    <!-- Total -->
+    <div style="display: flex; justify-content: space-between; align-items: center; background: #EAF3DE; border: 0.5px solid #C0DD97; border-radius: 12px; padding: 12px 16px;">
+        <span style="font-size: 13px; color: #3B6D11;">Total herd value</span>
+        <span style="font-size: 18px; font-weight: 500; color: #27500A;">R$ {{ "%.2f"|format(total) }}</span>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const input = document.getElementById("search");
+            const tbody = document.getElementById("tableBody");
+            const noResults = document.getElementById("noResults");
+
+            input.addEventListener("input", function() {
+                const termo = this.value.toLowerCase().trim();
+                const linhas = tbody.getElementsByTagName("tr");
+                let visiveis = 0;
+
+                for (let i = 0; i < linhas.length; i++) {
+                    const celula = linhas[i].getElementsByTagName("td")[0];
+                    if (celula) {
+                        const nome = celula.textContent.toLowerCase().trim();
+                        if (nome.includes(termo)) {
+                            linhas[i].style.display = "";
+                            visiveis++;
+                        } else {
+                            linhas[i].style.display = "none";
+                        }
+                    }
+                }
+
+                noResults.style.display = visiveis === 0 ? "block" : "none";
+            });
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New animal
+{% endblock %}
+
+{% block main %}
+    <h2 style="color: #27500A; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 1.5rem;">
+        &#128203; New animal
+    </h2>
+
+    <!-- Formulário -->
+    <div style="background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        <form action="{{ url_for('new') }}" method="post">
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center;">
+                <input type="text" name="animal" placeholder="Animal identification"
+                       style="height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px;">
+
+                <input type="text" name="birth" placeholder="Birthday (DD/MM/YYYY)"
+                       style="height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px;">
+
+                <input type="text" name="price" placeholder="Price"
+                       style="height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px;">
+
+                <select name="sex"
+                        style="height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px; background: #fff;">
+                    <option value="">Select a sex</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+
+                <button type="submit"
+                        style="height: 38px; padding: 6px 20px; border-radius: 6px; background: #3B6D11; color: #EAF3DE; border: none; font-size: 14px; cursor: pointer;">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Título da tabela -->
+    <div style="font-size: 14px; font-weight: 500; color: #3B6D11; margin-bottom: 10px; text-align: left;">
+        &#128221; Register history
+    </div>
+
+    <!-- Barra de pesquisa -->
+    <div style="margin-bottom: 12px;">
+        <input type="text" id="search" placeholder="&#128269; Search animal..."
+            style="width: 100%; height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px; outline: none;">
+    </div>
+
+    <!-- Tabela -->
+    <div style="background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; overflow: hidden;">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Animal</th>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Registered at</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                {% for item in insert_time %}
+                <tr>
+                    <td style="border-color: #f0ebe0;">{{ item.identificacao }}</td>
+                    <td style="border-color: #f0ebe0;">{{ item.criado_em }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2" style="text-align: center; color: #888780; padding: 1.5rem;">
+                        No animals registered yet.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div id="noResults" style="display: none; text-align: center; color: #888780; padding: 1.5rem; background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; margin-top: 8px;">
+        No animals found.
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const input = document.getElementById("search");
+            const tbody = document.getElementById("tableBody");
+            const noResults = document.getElementById("noResults");
+
+            input.addEventListener("input", function() {
+                const termo = this.value.toLowerCase().trim();
+                const linhas = tbody.getElementsByTagName("tr");
+                let visiveis = 0;
+
+                for (let i = 0; i < linhas.length; i++) {
+                    const celula = linhas[i].getElementsByTagName("td")[0];
+                    if (celula) {
+                        const nome = celula.textContent.toLowerCase().trim();
+                        if (nome.includes(termo)) {
+                            linhas[i].style.display = "";
+                            visiveis++;
+                        } else {
+                            linhas[i].style.display = "none";
+                        }
+                    }
+                }
+
+                noResults.style.display = visiveis === 0 ? "block" : "none";
+            });
+        });
+    </script>
+
+{% endblock %}

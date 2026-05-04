@@ -1,0 +1,178 @@
+<!-- Choices.js -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h2 style="color: #27500A; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 1.5rem;">
+        &#128682; Removal control
+    </h2>
+
+    <!-- Formulário -->
+    <div style="background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        <form action="{{ url_for('history') }}" method="post">
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center;">
+                <select name="cow" id="cow"
+                        style="height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px; background: #fff;">
+                    <option value="">Select cow</option>
+                    {% for cow in cows %}
+                        <option value="{{ cow.identificacao }}" data-id="{{ cow.id }}">{{ cow.identificacao }}</option>
+                    {% endfor %}
+                </select>
+
+                <input type="hidden" name="cow_id" id="cow_id">
+
+                <select name="reason"
+                        style="height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px; background: #fff;">
+                    <option value="">Select reason</option>
+                    <option value="Sold">Sold</option>
+                    <option value="Death">Death</option>
+                    <option value="Disappeared">Disappeared</option>
+                </select>
+
+                <button type="submit"
+                        style="height: 38px; padding: 6px 20px; border-radius: 6px; background: #A32D2D; color: #fff; border: none; font-size: 14px; cursor: pointer;">
+                    Remove
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("cow").addEventListener("change", function() {
+            const selected = this.options[this.selectedIndex];
+            document.getElementById("cow_id").value = selected.dataset.id || "";
+        });
+    </script>
+
+    <!-- Título da tabela -->
+    <div style="font-size: 14px; font-weight: 500; color: #3B6D11; margin-bottom: 10px; text-align: left;">
+        &#128218; Removal history
+    </div>
+
+    <!-- Barra de pesquisa -->
+    <div style="margin-bottom: 12px;">
+        <input type="text" id="search" placeholder="&#128269; Search animal..."
+            style="width: 100%; height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px; outline: none;">
+    </div>
+
+    <!-- Tabela -->
+    <div style="background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; overflow: hidden;">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Animal</th>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Reason</th>
+                    <th style="background: #EAF3DE; color: #3B6D11; border-color: #C0DD97;">Removed at</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                {% for removal in removals %}
+                <tr>
+                    <td style="border-color: #f0ebe0;">{{ removal.identificacao }}</td>
+                    <td style="border-color: #f0ebe0;">
+                        {% if removal.reason == "Sold" %}
+                            <span style="background: #EAF3DE; color: #27500A; font-size: 11px; padding: 2px 10px; border-radius: 20px; display: inline-block;">Sold</span>
+                        {% elif removal.reason == "Death" %}
+                            <span style="background: #FCEBEB; color: #A32D2D; font-size: 11px; padding: 2px 10px; border-radius: 20px; display: inline-block;">Death</span>
+                        {% else %}
+                            <span style="background: #FAEEDA; color: #633806; font-size: 11px; padding: 2px 10px; border-radius: 20px; display: inline-block;">Disappeared</span>
+                        {% endif %}
+                    </td>
+                    <td style="border-color: #f0ebe0;">{{ removal.removed_at }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center; color: #888780; padding: 1.5rem;">
+                        No removals yet.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div id="noResults" style="display: none; text-align: center; color: #888780; padding: 1.5rem; background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; margin-top: 8px;">
+        No animals found.
+    </div>
+
+    <!-- Título + botão lado a lado -->
+    <!-- <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <div style="font-size: 14px; font-weight: 500; color: #3B6D11;">
+            &#128218; Removal history
+        </div>
+
+        {% if removals %}
+        <form action="/clear_history" method="POST"
+            onsubmit="return confirm('Clear all removal history?')">
+            <button type="submit"
+                    style="height: 32px; padding: 4px 14px; border-radius: 6px; background: #FCEBEB; color: #A32D2D; border: 0.5px solid #F09595; font-size: 12px; cursor: pointer;">
+                &#128465; Clear history
+            </button>
+        </form>
+        {% endif %}
+    </div> -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const input = document.getElementById("search");
+            const tbody = document.getElementById("tableBody");
+            const noResults = document.getElementById("noResults");
+
+            input.addEventListener("input", function() {
+                const termo = this.value.toLowerCase().trim();
+                const linhas = tbody.getElementsByTagName("tr");
+                let visiveis = 0;
+
+                for (let i = 0; i < linhas.length; i++) {
+                    const celula = linhas[i].getElementsByTagName("td")[0];
+                    if (celula) {
+                        const nome = celula.textContent.toLowerCase().trim();
+                        if (nome.includes(termo)) {
+                            linhas[i].style.display = "";
+                            visiveis++;
+                        } else {
+                            linhas[i].style.display = "none";
+                        }
+                    }
+                }
+
+                noResults.style.display = visiveis === 0 ? "block" : "none";
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const choices = new Choices('#cow', {
+                searchEnabled: true,
+                searchPlaceholderValue: "Search cow...",
+                itemSelectText: "",
+                noResultsText: "No cow found",
+                shouldSort: false,
+
+                // ✅ Busca apenas no campo "label" (nome visível)
+                searchFields: ["label"],
+
+                // ✅ Ajusta a sensibilidade da busca
+                fuseOptions: {
+                    includeScore: true,
+                    threshold: 0.0,      // 0.0 = correspondência exata
+                    distance: 0,
+                    minMatchCharLength: 1
+                }
+            });
+
+            document.getElementById("cow").addEventListener("change", function() {
+                const selected = this.options[this.selectedIndex];
+                document.getElementById("cow_id").value = selected.dataset.id || "";
+            });
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+
+    <div style="background: #fff; border: 0.5px solid #C0DD97; border-radius: 12px; padding: 2.5rem 2rem; max-width: 360px; margin: 0 auto; text-align: center;">
+
+        <!-- Ícone e título -->
+        <div style="font-size: 40px; margin-bottom: 0.5rem;">&#127807;</div>
+        <h2 style="font-size: 20px; font-weight: 500; color: #27500A; margin-bottom: 0.25rem;">Welcome back</h2>
+        <p style="font-size: 13px; color: #888780; margin-bottom: 1.5rem;">Log in to manage your herd</p>
+
+        <form action="/login" method="post">
+            <div style="margin-bottom: 12px;">
+                <input autocomplete="off" autofocus name="username" placeholder="Username" type="text"
+                       style="width: 100%; height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px; outline: none;">
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <input name="password" placeholder="Password" type="password"
+                       style="width: 100%; height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px; outline: none;">
+            </div>
+            <button type="submit"
+                    style="width: 100%; height: 38px; background: #3B6D11; color: #EAF3DE; border: none; border-radius: 6px; font-size: 14px; cursor: pointer;">
+                Log In
+            </button>
+        </form>
+
+        <!-- Link para registro -->
+        <p style="font-size: 13px; color: #888780; margin-top: 1.25rem; margin-bottom: 0;">
+            Don't have an account?
+            <a href="/register" style="color: #3B6D11; text-decoration: none; font-weight: 500;">Register</a>
+        </p>
+
+    </div>
+
+{% endblock %}

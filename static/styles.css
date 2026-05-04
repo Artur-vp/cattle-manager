@@ -1,0 +1,96 @@
+/* farm theme */
+.table thead th {
+    background-color: #EAF3DE;
+    color: #3B6D11;
+    border-color: #C0DD97;
+}
+
+.table {
+    border-color: #C0DD97;
+}
+
+.btn-primary {
+    background-color: #3B6D11;
+    border-color: #3B6D11;
+}
+
+.btn-primary:hover {
+    background-color: #27500A;
+    border-color: #27500A;
+}
+
+.btn-danger {
+    background-color: #A32D2D;
+    border-color: #A32D2D;
+}
+
+.card {
+    border-color: #C0DD97;
+}
+
+
+    /* Container principal */
+.choices {
+    margin: 0 !important;
+}
+.choices__inner {
+    border: 1px solid #C0DD97 !important;
+    border-radius: 6px !important;
+    background: #fff !important;
+    font-size: 14px !important;
+    min-height: 38px !important;
+    padding: 4px 8px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Texto selecionado */
+.choices__item--selectable {
+    font-size: 14px !important;
+    color: #2C2C2A !important;
+}
+
+/* Dropdown */
+.choices__list--dropdown {
+    border: 1px solid #C0DD97 !important;
+    border-radius: 6px !important;
+    margin-top: 4px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+/* Barra de pesquisa dentro do dropdown */
+.choices__input--cloned {
+    font-size: 14px !important;
+    border: none !important;
+    border-bottom: 1px solid #C0DD97 !important;
+    border-radius: 0 !important;
+    padding: 6px 10px !important;
+    background: #fff !important;
+}
+
+/* Cada opção da lista */
+.choices__list--dropdown .choices__item {
+    font-size: 14px !important;
+    color: #2C2C2A !important;
+    padding: 8px 12px !important;
+}
+
+/* Opção destacada ao passar o mouse */
+.choices__list--dropdown .choices__item--highlighted {
+    background: #EAF3DE !important;
+    color: #27500A !important;
+}
+
+/* Seta do select */
+.choices[data-type*=select-one]::after {
+    border-color: #3B6D11 transparent transparent !important;
+}
+
+/* Remove borda azul de foco */
+.choices__inner:focus,
+.choices.is-focused .choices__inner {
+    border-color: #3B6D11 !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+

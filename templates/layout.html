@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="/static/favicon.ico" rel="icon">
+    <link href="/static/styles.css" rel="stylesheet">
+    <title>Manager: {% block title %}{% endblock %}</title>
+</head>
+
+<body style="background-color: #f5f0e8;">
+
+    <nav class="navbar navbar-expand-md" style="background-color: #3B6D11;">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-500" href="/" style="color: #C0DD97;">
+                &#127807; Cattle Manager
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                    style="border-color: #C0DD97;">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                {% if session["user_id"] %}
+                    <ul class="navbar-nav me-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/new"     style="color: #EAF3DE;">&#128203; New animal</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/catalog" style="color: #EAF3DE;">&#128004; Catalog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/control" style="color: #EAF3DE;">&#128202; Control</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/history" style="color: #EAF3DE;">&#128218; History</a></li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/logout" style="color: #FAC775;">Log out</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav ms-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/register" style="color: #EAF3DE;">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login"    style="color: #FAC775;">Log in</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- banner verde claro abaixo da navbar -->
+    <div style="background: #EAF3DE; border-bottom: 1px solid #C0DD97; padding: 6px 1.5rem; font-size: 13px; color: #3B6D11;">
+        &#127807; &nbsp; Cattle Manager — keep your herd organized
+    </div>
+
+    {% if get_flashed_messages() %}
+        <div class="alert alert-success mb-0 text-center" role="alert"
+             style="background: #EAF3DE; color: #27500A; border: none; border-radius: 0;">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    {% endif %}
+
+    <main class="container py-5 text-center">
+        {% block main %}{% endblock %}
+    </main>
+
+</body>
+</html>
