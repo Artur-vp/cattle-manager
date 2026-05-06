@@ -7,7 +7,8 @@ Manager
 {% block main %}
 <div style="padding: 2rem 0;">
     <div style="text-align: center; margin-bottom: 2.5rem;">
-        <div style="font-size: 40px; margin-bottom: 0.5rem;">🐄</div>
+        <div style="font-size: 40px; margin-bottom: 0.5rem;"><img src="{{ url_for('static', filename='cow-alt.png') }}"
+     style="width: 40px; height: 40px; margin-right: 6px;"></div>
         <h1 style="font-size: 28px; font-weight: 500; margin: 0 0 0.5rem;">Cattle Manager</h1>
         <p style="font-size: 15px; color: var(--color-text-secondary); margin: 0;">A simple and organized way to manage
             your herd</p>
@@ -17,21 +18,24 @@ Manager
         style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 2.5rem;">
         <div
             style="background: var(--color-background-secondary); border-radius: 8px; padding: 1rem; text-align: center;">
-            <div style="font-size: 24px; margin-bottom: 6px;">📋</div>
+            <div style="font-size: 24px; margin-bottom: 6px;"><img src="{{ url_for('static', filename='clipboard-list.png') }}"
+     style="width: 28px; height: 28px; margin-right: 6px;"></div>
             <p style="font-size: 13px; font-weight: 500; margin: 0 0 4px;">New animal</p>
             <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">Add animals with ID, birth date
                 and value</p>
         </div>
         <div
             style="background: var(--color-background-secondary); border-radius: 8px; padding: 1rem; text-align: center;">
-            <div style="font-size: 24px; margin-bottom: 6px;">📊</div>
+            <div style="font-size: 24px; margin-bottom: 6px;"><img src="{{ url_for('static', filename='stats.png') }}"
+     style="width: 28px; height: 28px; margin-right: 6px;"></div>
             <p style="font-size: 13px; font-weight: 500; margin: 0 0 4px;">Catalog</p>
             <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">View age, value, sex and herd
                 charts</p>
         </div>
         <div
             style="background: var(--color-background-secondary); border-radius: 8px; padding: 1rem; text-align: center;">
-            <div style="font-size: 24px; margin-bottom: 6px;">🗂️</div>
+            <div style="font-size: 24px; margin-bottom: 6px;"><img src="{{ url_for('static', filename='book-open-cover.png') }}"
+     style="width: 28px; height: 28px; margin-right: 6px;"></div>
             <p style="font-size: 13px; font-weight: 500; margin: 0 0 4px;">History</p>
             <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">Track every removal with reason
                 and date</p>
@@ -50,7 +54,8 @@ Manager
 
     <div
         style="background: var(--color-background-secondary); border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 12px;">
-        <div style="font-size: 20px;">🌱</div>
+        <div style="font-size: 20px;"><img src="{{ url_for('static', filename='seedling.png') }}"
+                        style="width: 24px; height: 24px; margin-right: 6px;"></div>
         <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0;">Replace paper records and
             spreadsheets with a fast, accessible, and secure digital tool — available from any device with a browser.
         </p>

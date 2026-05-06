@@ -17,7 +17,8 @@
     <nav class="navbar navbar-expand-md" style="background-color: #3B6D11;">
         <div class="container-fluid">
             <a class="navbar-brand fw-500" href="/" style="color: #C0DD97;">
-                &#127807; Cattle Manager
+                <img src="{{ url_for('static', filename='plant-care (1).png') }}"
+                style="width: 24px; height: 24px; margin-right: 6px; "> Cattle Manager
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
                     style="border-color: #C0DD97;">
@@ -26,10 +27,14 @@
             <div class="collapse navbar-collapse" id="navbar">
                 {% if session["user_id"] %}
                     <ul class="navbar-nav me-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/new"     style="color: #EAF3DE;">&#128203; New animal</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/catalog" style="color: #EAF3DE;">&#128004; Catalog</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/control" style="color: #EAF3DE;">&#128202; Control</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/history" style="color: #EAF3DE;">&#128218; History</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/new"     style="color: #EAF3DE;"><img src="{{ url_for('static', filename='clipboard-list.png') }}"
+                        style="width: 24px; height: 24px; margin-right: 6px; filter: invert(1);"> New animal</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/catalog" style="color: #EAF3DE;"><img src="{{ url_for('static', filename='cow-alt.png') }}"
+                        style="width: 24px; height: 24px; margin-right: 6px; filter: invert(1);"> Catalog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/control" style="color: #EAF3DE;"><img src="{{ url_for('static', filename='stats.png') }}"
+                        style="width: 24px; height: 24px; margin-right: 6px; filter: invert(1);"> Control</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/history" style="color: #EAF3DE;"><img src="{{ url_for('static', filename='book-open-cover.png') }}"
+                        style="width: 24px; height: 24px; margin-right: 6px; filter: invert(1);"> History</a></li>
                     </ul>
                     <ul class="navbar-nav ms-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/logout" style="color: #FAC775;">Log out</a></li>
@@ -46,7 +51,8 @@
 
     <!-- banner verde claro abaixo da navbar -->
     <div style="background: #EAF3DE; border-bottom: 1px solid #C0DD97; padding: 6px 1.5rem; font-size: 13px; color: #3B6D11;">
-        &#127807; &nbsp; Cattle Manager — keep your herd organized
+        <img src="{{ url_for('static', filename='plant-care.png') }}"
+                style="width: 18px; height: 18px; margin-right: 6px; filter: invert(32%) sepia(57%) saturate(600%) hue-rotate(70deg) brightness(90%);"> Cattle Manager — keep your herd organized
     </div>
 
     {% if get_flashed_messages() %}

@@ -10,7 +10,8 @@
 
 {% block main %}
     <h2 style="color: #27500A; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 1.5rem;">
-        &#128682; Removal control
+        <img src="{{ url_for('static', filename='book-open-cover.png') }}"
+                        style="width: 40px; height: 40px; margin-right: 6px; filter: invert(32%) sepia(57%) saturate(600%) hue-rotate(70deg) brightness(90%);"> Removal control
     </h2>
 
     <!-- Formulário -->
@@ -52,13 +53,19 @@
 
     <!-- Título da tabela -->
     <div style="font-size: 14px; font-weight: 500; color: #3B6D11; margin-bottom: 10px; text-align: left;">
-        &#128218; Removal history
+        <img src="{{ url_for('static', filename='book-open-cover.png') }}"
+                        style="width: 20px; height: 20px; margin-right: 2px; filter: invert(32%) sepia(57%) saturate(600%) hue-rotate(70deg) brightness(90%);"> Removal history
     </div>
 
     <!-- Barra de pesquisa -->
     <div style="margin-bottom: 12px;">
-        <input type="text" id="search" placeholder="&#128269; Search animal..."
-            style="width: 100%; height: 38px; padding: 6px 12px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px; outline: none;">
+        <div style="position: relative;">
+            <img src="{{ url_for('static', filename='search.png') }}"
+            style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; filter: invert(32%) sepia(57%) saturate(600%) hue-rotate(70deg) brightness(90%); pointer-events: none;">
+
+            <input type="text" id="search" placeholder="Search animal..."
+            style="width: 100%; height: 38px; padding: 6px 12px 6px 34px; border: 1px solid #C0DD97; border-radius: 6px; font-size: 14px; outline: none;">
+        </div>
     </div>
 
     <!-- Tabela -->

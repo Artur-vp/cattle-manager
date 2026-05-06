@@ -6,7 +6,7 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import date, datetime
 
-from helpers import apology, login_required, lookup, usd
+from helpers import apology, login_required
 
 app = Flask(__name__)
 
@@ -278,3 +278,9 @@ def register():
         return redirect("/")
     else:
         return render_template("register.html")
+
+#if __name__ == "__main__":
+    #app.run(debug=True)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
