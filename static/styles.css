@@ -96,11 +96,11 @@
 
 /* No celular empilha as informações */
 @media (max-width: 576px) {
-    table thead {
+    #catalogTable table thead {
         display: none;
     }
 
-    table tr {
+    #catalogTable table tr {
         display: block;
         margin-bottom: 12px;
         border: 0.5px solid #C0DD97;
@@ -109,7 +109,7 @@
         background: #fff;
     }
 
-    table td {
+    #catalogTable table td {
         display: block;
         text-align: right;
         border: none !important;
@@ -117,7 +117,7 @@
         font-size: 13px;
     }
 
-    table td::before {
+    #catalogTable table td::before {
         content: attr(data-label);
         float: left;
         font-weight: 500;
