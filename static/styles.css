@@ -94,3 +94,33 @@
     outline: none !important;
 }
 
+/* No celular empilha as informações */
+@media (max-width: 576px) {
+    table thead {
+        display: none;
+    }
+
+    table tr {
+        display: block;
+        margin-bottom: 12px;
+        border: 0.5px solid #C0DD97;
+        border-radius: 12px;
+        padding: 10px;
+        background: #fff;
+    }
+
+    table td {
+        display: block;
+        text-align: right;
+        border: none !important;
+        padding: 6px 10px !important;
+        font-size: 13px;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: 500;
+        color: #3B6D11;
+    }
+}
